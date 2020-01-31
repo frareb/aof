@@ -1,5 +1,7 @@
 #' osfi
 #'
+#' Ontogenetic Shifts in central-place Foraging Insects
+#'
 #' @details xxxx
 #' @param bee xxxx
 #' @param Age xxx
