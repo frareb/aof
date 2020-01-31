@@ -9,7 +9,6 @@
 #' @return xxxx
 #' @examples
 #' require("bcpa")
-#' par(mar = c(4, 4, 1, 1), mfrow = c(1, 1))
 #' # 1. Exemple with simulated data:
 #' # 1.1. No change simulated
 #' mu1 <- 50  # behavioral change: 25 or 50
