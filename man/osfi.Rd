@@ -4,7 +4,7 @@
 \alias{osfi}
 \title{osfi}
 \usage{
-osfi(bee, Age, x, getPlot = FALSE)
+osfi(bee, Age, x)
 }
 \arguments{
 \item{bee}{xxxx}
@@ -12,21 +12,18 @@ osfi(bee, Age, x, getPlot = FALSE)
 \item{Age}{xxx}
 
 \item{x}{xxxx}
-
-\item{getPlot}{A boolean for graphical output.}
 }
 \value{
 xxxx
 }
 \description{
-osfi
+Ontogenetic Shifts in central-place Foraging Insects
 }
 \details{
 xxxx
 }
 \examples{
 require("bcpa")
-par(mar = c(4, 4, 1, 1), mfrow = c(1, 1))
 # 1. Exemple with simulated data:
 # 1.1. No change simulated
 mu1 <- 50  # behavioral change: 25 or 50
@@ -60,8 +57,7 @@ TimeBudget <- data.frame(
 AOF <- osfi(
   bee = TimeBudget$bee,
   Age = TimeBudget$Age,
-  x = TimeBudget$x,
-  getPlot = TRUE)
+  x = TimeBudget$x)
 print(AOF)
 
 
