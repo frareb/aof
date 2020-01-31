@@ -6,7 +6,6 @@
 #' @param bee xxxx
 #' @param Age xxx
 #' @param x xxxx
-#' @param getPlot A boolean for graphical output.
 #' @return xxxx
 #' @examples
 #' require("bcpa")
@@ -44,15 +43,14 @@
 #' AOF <- osfi(
 #'   bee = TimeBudget$bee,
 #'   Age = TimeBudget$Age,
-#'   x = TimeBudget$x,
-#'   getPlot = TRUE)
+#'   x = TimeBudget$x)
 #' print(AOF)
 #'
 #'
 #'
 #' # 1.1.2.
 #' @export
-osfi <- function(bee, Age, x, getPlot = FALSE){
+osfi <- function(bee, Age, x){
   TimeBudget <- data.frame(
     bee = bee,
     Age = Age,
@@ -183,42 +181,39 @@ osfi <- function(bee, Age, x, getPlot = FALSE){
   #-------------------------------------
   close(progress.time)
   #-------------------------------------
-  if (getPlot == TRUE){
-    graphics::plot(
-      x = TimeBudget$Age,
-      y = TimeBudget$x,
-      las = 1,
-      xlab = "Age (day)", ylab = "Time-activity budget",
-      col = NA)
-    # graphics::abline(v = t.break, col = 1, lwd = 1, lty = 3)
-    goodbreak1 = max(TimeBudget$Age[TimeBudget$Age < 25])
-    goodbreak2 = min(TimeBudget$Age[TimeBudget$Age >= 25])
-    # graphics::polygon(c(goodbreak1 - 0.5, goodbreak2 + 0.5,
-    #           goodbreak2 + 0.5, goodbreak1 - 0.5),
-    #         c(0, 0, 100, 100), col = "gray50", border = NA)
-    graphics::points(
-      x = TimeBudget$Age,
-      y = TimeBudget$x,
-      pch = 21,
-      col = "gray20",
-      bg = "gray80")
-    graphics::abline(v = AOF$AOF, col = "black", lwd = 2, lty = 3)
-    graphics::lines(
-      c(min(TimeBudget$Age), AOF$AOF),
-      c(AOF$behav.learning, AOF$behav.learning),
-      col = "black", lwd = 2)
-    graphics::lines(
-      c(AOF$AOF, max(TimeBudget$Age)),
-      c(AOF$behav.foraging,AOF$behav.foraging),
-      col = "black", lwd = 2)
-  }
   return(AOF)
 }
 
 
 
-
-
+# plot.osfi <- function(AOF)
+# graphics::plot(
+#   x = TimeBudget$Age,
+#   y = TimeBudget$x,
+#   las = 1,
+#   xlab = "Age (day)", ylab = "Time-activity budget",
+#   col = NA)
+# # graphics::abline(v = t.break, col = 1, lwd = 1, lty = 3)
+# goodbreak1 = max(TimeBudget$Age[TimeBudget$Age < 25])
+# goodbreak2 = min(TimeBudget$Age[TimeBudget$Age >= 25])
+# # graphics::polygon(c(goodbreak1 - 0.5, goodbreak2 + 0.5,
+# #           goodbreak2 + 0.5, goodbreak1 - 0.5),
+# #         c(0, 0, 100, 100), col = "gray50", border = NA)
+# graphics::points(
+#   x = TimeBudget$Age,
+#   y = TimeBudget$x,
+#   pch = 21,
+#   col = "gray20",
+#   bg = "gray80")
+# graphics::abline(v = AOF$AOF, col = "black", lwd = 2, lty = 3)
+# graphics::lines(
+#   c(min(TimeBudget$Age), AOF$AOF),
+#   c(AOF$behav.learning, AOF$behav.learning),
+#   col = "black", lwd = 2)
+# graphics::lines(
+#   c(AOF$AOF, max(TimeBudget$Age)),
+#   c(AOF$behav.foraging,AOF$behav.foraging),
+#   col = "black", lwd = 2)
 
 
 
