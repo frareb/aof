@@ -3,6 +3,7 @@ language: r
 r_packages:
   - covr
   - devtools
+  - testthat
 
 r:
   - oldrel
