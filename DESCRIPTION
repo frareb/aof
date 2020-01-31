@@ -1,0 +1,17 @@
+Package: osfi
+Type: Package
+Title: Ontogenetic Shifts in Central-Place Foraging Insects
+Version: 0.1.0
+Author: Fabrice Réquier [aut, cre], François Rebaudo [aut]
+Maintainer: Fabrice Réquier <fabrice.requier@ird.fr>
+Description: A breakpoint-based method to detect ontogenetic shifts in 
+  univariate time-activity budget series of central-place foraging insects. 
+  The method finds a single breakpoint according to the likelihood function.
+License: GPL-2
+Encoding: UTF-8
+LazyData: true
+Imports:
+  bcpa (>= 1.1)
+URL: https://github.com/frareb/osfi/
+BugReports: https://github.com/frareb/osfi/issues
+RoxygenNote: 7.0.2
