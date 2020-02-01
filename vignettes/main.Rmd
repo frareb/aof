@@ -50,6 +50,38 @@ getTimeBudget <- function(
     x = x.full[keep])
   return(TimeBudget)
 }
+getOsfiPlot <- function(t.break = 25, poly = FALSE){
+  par(mar = c(4, 4, 1, 1), mfrow = c(1, 1))
+  plot(
+    x = TimeBudget$Age,
+    y = TimeBudget$x, 
+    las = 1,
+    xlab = "Age (day)", ylab = "Time-activity budget",
+    pch = 21,
+    col = "gray20", bg = "gray80")
+  goodbreak1 = max(TimeBudget$Age[TimeBudget$Age < t.break])
+  goodbreak2 = min(TimeBudget$Age[TimeBudget$Age >= t.break])
+  if(poly == TRUE){
+    polygon(
+      c(
+        goodbreak1 - 0.5, 
+        goodbreak2 + 0.5, 
+        goodbreak2 + 0.5, 
+        goodbreak1 - 0.5),
+      c(0, 0, 100, 100), 
+      col = "gray50", border = NA)
+  }
+  abline(v = AOF$AOF, col = "black", lwd = 2, lty = 3)
+  lines(
+    x = c(min(TimeBudget$Age), AOF$AOF), 
+    y = c(AOF$behav.learning, AOF$behav.learning), 
+    col = "black", lwd = 2)
+  lines(
+    x = c(AOF$AOF, max(TimeBudget$Age)),
+    y = c(AOF$behav.foraging, AOF$behav.foraging),
+    col = "black", lwd = 2)
+  return(c(goodbreak1, goodbreak2))
+}
 ```
 
 # 1. Examples with no change simulated in the time series
@@ -58,15 +90,9 @@ getTimeBudget <- function(
 
 ```{r cc011}
 TimeBudget <- getTimeBudget(
-  mu1 = 50,
-  mu2 = 50,
-  rho1 = 0.5,
-  rho2 = 0.5,
   n.obs = 5, 
   sigma1 = 0.1,
-  sigma2 = 0.1,
-  t.full = 0:50,
-  t.break = 25)
+  sigma2 = 0.1)
 print(TimeBudget)
 AOF <- osfi(
   bee = TimeBudget[,1], 
@@ -75,43 +101,17 @@ AOF <- osfi(
 print(AOF)
 ```
 
-```{r cc011b, fig.width=7, fig.height=5}
-t.break <- 25
-
-par(mar = c(4, 4, 1, 1), mfrow = c(1, 1))
-plot(
-  x = TimeBudget$Age,
-  y = TimeBudget$x, 
-  las = 1,
-  xlab = "Age (day)", ylab = "Time-activity budget",
-  pch = 21,
-  col = "gray20", bg = "gray80")
-goodbreak1 = max(TimeBudget$Age[TimeBudget$Age < t.break])
-goodbreak2 = min(TimeBudget$Age[TimeBudget$Age >= t.break])
-abline(v = AOF$AOF, col = "black", lwd = 2, lty = 3)
-lines(
-  x = c(min(TimeBudget$Age), AOF$AOF), 
-  y = c(AOF$behav.learning, AOF$behav.learning), 
-  col = "black", lwd = 2)
-lines(
-  x = c(AOF$AOF, max(TimeBudget$Age)),
-  y = c(AOF$behav.foraging, AOF$behav.foraging),
-  col = "black", lwd = 2)
+```{r cc011b, fig.width=7, fig.height=5, warning=FALSE}
+getOsfiPlot()
 ```
 
 ## 1.2. Low number of individuals and high variance
 
 ```{r cc012}
 TimeBudget <- getTimeBudget(
-  mu1 = 50,
-  mu2 = 50,
-  rho1 = 0.5,
-  rho2 = 0.5,
   n.obs = 5, 
   sigma1 = 3,
-  sigma2 = 3,
-  t.full = 0:50,
-  t.break = 25)
+  sigma2 = 3)
 print(TimeBudget)
 AOF <- osfi(
   bee = TimeBudget[,1], 
@@ -120,43 +120,17 @@ AOF <- osfi(
 print(AOF)
 ```
 
-```{r cc012b, fig.width=7, fig.height=5}
-t.break <- 25
-
-par(mar = c(4, 4, 1, 1), mfrow = c(1, 1))
-plot(
-  x = TimeBudget$Age,
-  y = TimeBudget$x, 
-  las = 1,
-  xlab = "Age (day)", ylab = "Time-activity budget",
-  pch = 21,
-  col = "gray20", bg = "gray80")
-goodbreak1 = max(TimeBudget$Age[TimeBudget$Age < t.break])
-goodbreak2 = min(TimeBudget$Age[TimeBudget$Age >= t.break])
-abline(v = AOF$AOF, col = "black", lwd = 2, lty = 3)
-lines(
-  x = c(min(TimeBudget$Age), AOF$AOF), 
-  y = c(AOF$behav.learning, AOF$behav.learning), 
-  col = "black", lwd = 2)
-lines(
-  x = c(AOF$AOF, max(TimeBudget$Age)),
-  y = c(AOF$behav.foraging, AOF$behav.foraging),
-  col = "black", lwd = 2)
+```{r cc012b, fig.width=7, fig.height=5, warning=FALSE}
+getOsfiPlot()
 ```
 
 ## 1.3. High number of individuals and low variance
 
 ```{r cc013}
 TimeBudget <- getTimeBudget(
-  mu1 = 50,
-  mu2 = 50,
-  rho1 = 0.5,
-  rho2 = 0.5,
   n.obs = 45, 
   sigma1 = 0.1,
-  sigma2 = 0.1,
-  t.full = 0:50,
-  t.break = 25)
+  sigma2 = 0.1)
 print(TimeBudget)
 AOF <- osfi(
   bee = TimeBudget[,1], 
@@ -165,43 +139,17 @@ AOF <- osfi(
 print(AOF)
 ```
 
-```{r cc013b, fig.width=7, fig.height=5}
-t.break <- 25
-
-par(mar = c(4, 4, 1, 1), mfrow = c(1, 1))
-plot(
-  x = TimeBudget$Age,
-  y = TimeBudget$x, 
-  las = 1,
-  xlab = "Age (day)", ylab = "Time-activity budget",
-  pch = 21,
-  col = "gray20", bg = "gray80")
-goodbreak1 = max(TimeBudget$Age[TimeBudget$Age < t.break])
-goodbreak2 = min(TimeBudget$Age[TimeBudget$Age >= t.break])
-abline(v = AOF$AOF, col = "black", lwd = 2, lty = 3)
-lines(
-  x = c(min(TimeBudget$Age), AOF$AOF), 
-  y = c(AOF$behav.learning, AOF$behav.learning), 
-  col = "black", lwd = 2)
-lines(
-  x = c(AOF$AOF, max(TimeBudget$Age)),
-  y = c(AOF$behav.foraging, AOF$behav.foraging),
-  col = "black", lwd = 2)
+```{r cc013b, fig.width=7, fig.height=5, warning=FALSE}
+getOsfiPlot()
 ```
 
 ## 1.4. High number of individuals and high variance
 
 ```{r cc014}
 TimeBudget <- getTimeBudget(
-  mu1 = 50,
-  mu2 = 50,
-  rho1 = 0.5,
-  rho2 = 0.5,
   n.obs = 45, 
   sigma1 = 3,
-  sigma2 = 3,
-  t.full = 0:50,
-  t.break = 25)
+  sigma2 = 3)
 print(TimeBudget)
 AOF <- osfi(
   bee = TimeBudget[,1], 
@@ -210,30 +158,91 @@ AOF <- osfi(
 print(AOF)
 ```
 
-```{r cc014b, fig.width=7, fig.height=5}
-t.break <- 25
-
-par(mar = c(4, 4, 1, 1), mfrow = c(1, 1))
-plot(
-  x = TimeBudget$Age,
-  y = TimeBudget$x, 
-  las = 1,
-  xlab = "Age (day)", ylab = "Time-activity budget",
-  pch = 21,
-  col = "gray20", bg = "gray80")
-goodbreak1 = max(TimeBudget$Age[TimeBudget$Age < t.break])
-goodbreak2 = min(TimeBudget$Age[TimeBudget$Age >= t.break])
-abline(v = AOF$AOF, col = "black", lwd = 2, lty = 3)
-lines(
-  x = c(min(TimeBudget$Age), AOF$AOF), 
-  y = c(AOF$behav.learning, AOF$behav.learning), 
-  col = "black", lwd = 2)
-lines(
-  x = c(AOF$AOF, max(TimeBudget$Age)),
-  y = c(AOF$behav.foraging, AOF$behav.foraging),
-  col = "black", lwd = 2)
+```{r cc014b, fig.width=7, fig.height=5, warning=FALSE}
+getOsfiPlot()
 ```
 
 # 2. Examples with change simulated in the time series
 
 ## 2.1. Low number of individuals and low variance
+
+```{r cc021}
+TimeBudget <- getTimeBudget(
+  mu1 = 25,
+  n.obs = 5, 
+  sigma1 = 0.1,
+  sigma2 = 0.1)
+print(TimeBudget)
+AOF <- osfi(
+  bee = TimeBudget[,1], 
+  Age = TimeBudget[,2], 
+  x = TimeBudget[,3])
+print(AOF)
+```
+
+```{r cc021b, fig.width=7, fig.height=5, warning=FALSE}
+getOsfiPlot(poly = TRUE)
+```
+
+## 2.2. Low number of individuals and high variance
+
+```{r cc022}
+TimeBudget <- getTimeBudget(
+  mu1 = 25,
+  n.obs = 5, 
+  sigma1 = 3,
+  sigma2 = 3)
+print(TimeBudget)
+AOF <- osfi(
+  bee = TimeBudget[,1], 
+  Age = TimeBudget[,2], 
+  x = TimeBudget[,3])
+print(AOF)
+```
+
+```{r cc022b, fig.width=7, fig.height=5, warning=FALSE}
+getOsfiPlot(poly = TRUE)
+```
+
+## 2.3. High number of individuals and low variance
+
+```{r cc023}
+TimeBudget <- getTimeBudget(
+  mu1 = 25,
+  n.obs = 45, 
+  sigma1 = 0.1,
+  sigma2 = 0.1)
+print(TimeBudget)
+AOF <- osfi(
+  bee = TimeBudget[,1], 
+  Age = TimeBudget[,2], 
+  x = TimeBudget[,3])
+print(AOF)
+```
+
+```{r cc023b, fig.width=7, fig.height=5, warning=FALSE}
+getOsfiPlot(poly = TRUE)
+```
+
+## 2.3. High number of individuals and high variance
+
+```{r cc024}
+TimeBudget <- getTimeBudget(
+  mu1 = 25,
+  n.obs = 45, 
+  sigma1 = 3,
+  sigma2 = 3)
+print(TimeBudget)
+AOF <- osfi(
+  bee = TimeBudget[,1], 
+  Age = TimeBudget[,2], 
+  x = TimeBudget[,3])
+print(AOF)
+```
+
+```{r cc024b, fig.width=7, fig.height=5, warning=FALSE}
+getOsfiPlot(poly = TRUE)
+```
+
+
+
