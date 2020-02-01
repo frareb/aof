@@ -15,4 +15,8 @@ Imports:
 URL: https://github.com/frareb/osfi/
 BugReports: https://github.com/frareb/osfi/issues
 RoxygenNote: 7.0.2
-Suggests: testthat
+Suggests: 
+    testthat,
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
