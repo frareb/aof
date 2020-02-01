@@ -2,20 +2,22 @@
 #'
 #' Ontogenetic Shifts in central-place Foraging Insects
 #'
-#' @details xxxx
+#' @details A breakpoint-based method to detect ontogenetic shifts in
+#' univariate time-activity budget series of central-place foraging insects.
+#' The method finds a single breakpoint according to the likelihood function.
 #' @param bee xxxx
 #' @param Age xxx
 #' @param x xxxx
-#' @return xxxx
+#' @return A data.frame with one row containing the osfi results.
 #' @examples
 #' require("bcpa")
-#' # 1. Exemple with simulated data:
-#' # 1.1. No change simulated
+#' # Exemple with simulated data:
+#' # No change simulated
 #' mu1 <- 50  # behavioral change: 25 or 50
 #' mu2 <- 50
 #' rho1 = 0.5 # intrerval frequency
 #' rho2 = 0.5
-#' # 1.1.1. N low and V low
+#' # N low and V low
 #' # A single changepoint in a time-series where the parameters change at
 #' # some unknown timepoints t* is done by simply sweeping all possible
 #' # breaks, and finding the most-likely changepoint according to the
@@ -44,10 +46,7 @@
 #'   Age = TimeBudget$Age,
 #'   x = TimeBudget$x)
 #' print(AOF)
-#'
-#'
-#'
-#' # 1.1.2.
+#' # see vignette for more examples
 #' @export
 osfi <- function(bee, Age, x){
   TimeBudget <- data.frame(
