@@ -244,5 +244,9 @@ print(AOF)
 getOsfiPlot(poly = TRUE)
 ```
 
+# 3. Real dataset
+
+This is a subset of 16 bees randomly selected in the exeprimental design of Requier et al. (J. Animal Ecology). 
+
 
 
