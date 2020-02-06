@@ -3,8 +3,8 @@ note <- sprintf('R package version %s', meta$Version)
 
 bibentry(bibtype = 'Manual',
   title = "osfi: Ontogenetic Shifts in Central-Place Foraging Insects",
-  author = "Fabrice Réquier and François Rebaudo",
+  author = "Fabrice Requier and François Rebaudo",
   year = year,
   note = note,
-  url = "https://github.com/frareb/osfi/"
+  url = "https://github.com/frareb/aof/"
 )

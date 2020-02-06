@@ -1,16 +1,16 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# osfi package
+# aof package
 
 [![Build
-Status](https://travis-ci.org/frareb/osfi.svg?branch=master)](https://travis-ci.org/frareb/osfi)
+Status](https://travis-ci.org/frareb/aof.svg?branch=master)](https://travis-ci.org/frareb/aof)
 [![CRAN
-version](https://www.r-pkg.org/badges/version/osfi)](https://CRAN.R-project.org/package=osfi)
+version](https://www.r-pkg.org/badges/version/aof)](https://CRAN.R-project.org/package=aof)
 [![CRAN
-downloads](https://cranlogs.r-pkg.org/badges/grand-total/osfi)](https://CRAN.R-project.org/package=osfi)
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/aof)](https://CRAN.R-project.org/package=aof)
 [![Coverage
-Status](https://img.shields.io/codecov/c/gh/frareb/osfi/master.svg)](https://codecov.io/gh/frareb/osfi?branch=master)
+Status](https://img.shields.io/codecov/c/gh/frareb/aof/master.svg)](https://codecov.io/gh/frareb/aof?branch=master)
 
 ## Purpose of the package
 
@@ -22,11 +22,11 @@ method finds a single breakpoint according to the likelihood function.
 
 ``` r
 # from CRAN
-install.packages("osfi")
+install.packages("aof")
 
 # Or the development version from GitHub:
 # install.packages("devtools")
-devtools::install_github("frareb/osfi")
+devtools::install_github("frareb/aof")
 ```
 
 ## Authors’ affiliation
@@ -36,19 +36,19 @@ UMR EGCE (IRD, CNRS, Univ. Paris-Saclay), Gif-sur-Yvette, France
 To cite this package please use:
 
 ``` r
-citation("osfi") 
+citation("aof") 
 #> 
-#> Réquier F, Rebaudo F (2020). _osfi: Ontogenetic Shifts in Central-Place
+#> Requier F, Rebaudo F (2020). _osfi: Ontogenetic Shifts in Central-Place
 #> Foraging Insects_. R package version 0.1.0, <URL:
-#> https://github.com/frareb/osfi/>.
+#> https://github.com/frareb/aof/>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
 #>     title = {osfi: Ontogenetic Shifts in Central-Place Foraging Insects},
-#>     author = {Fabrice Réquier and François Rebaudo},
+#>     author = {Fabrice Requier and François Rebaudo},
 #>     year = {2020},
 #>     note = {R package version 0.1.0},
-#>     url = {https://github.com/frareb/osfi/},
+#>     url = {https://github.com/frareb/aof/},
 #>   }
 ```

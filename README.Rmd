@@ -11,12 +11,12 @@ knitr::opts_chunk$set(
 )
 ```
 
-# osfi package
+# aof package
 
-[![Build Status](https://travis-ci.org/frareb/osfi.svg?branch=master)](https://travis-ci.org/frareb/osfi)
-[![CRAN version](https://www.r-pkg.org/badges/version/osfi)](https://CRAN.R-project.org/package=osfi)
-[![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/osfi)](https://CRAN.R-project.org/package=osfi)
-[![Coverage Status](https://img.shields.io/codecov/c/gh/frareb/osfi/master.svg)](https://codecov.io/gh/frareb/osfi?branch=master)
+[![Build Status](https://travis-ci.org/frareb/aof.svg?branch=master)](https://travis-ci.org/frareb/aof)
+[![CRAN version](https://www.r-pkg.org/badges/version/aof)](https://CRAN.R-project.org/package=aof)
+[![CRAN downloads](https://cranlogs.r-pkg.org/badges/grand-total/aof)](https://CRAN.R-project.org/package=aof)
+[![Coverage Status](https://img.shields.io/codecov/c/gh/frareb/aof/master.svg)](https://codecov.io/gh/frareb/aof?branch=master)
 
 ## Purpose of the package
 
@@ -26,11 +26,11 @@ A breakpoint-based method to detect ontogenetic shifts in univariate time-activi
 
 ```{r inst01, eval=FALSE}
 # from CRAN
-install.packages("osfi")
+install.packages("aof")
 
 # Or the development version from GitHub:
 # install.packages("devtools")
-devtools::install_github("frareb/osfi")
+devtools::install_github("frareb/aof")
 ```
 
 ## Authors' affiliation
@@ -40,5 +40,5 @@ UMR EGCE (IRD, CNRS, Univ. Paris-Saclay), Gif-sur-Yvette, France
 To cite this package please use: 
 
 ```{r auth01, eval=TRUE}
-citation("osfi") 
+citation("aof") 
 ```

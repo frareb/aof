@@ -1,4 +1,4 @@
-#' osfi
+#' aof
 #'
 #' Ontogenetic Shifts in central-place Foraging Insects
 #'
@@ -8,7 +8,7 @@
 #' @param bee xxxx
 #' @param Age xxx
 #' @param x xxxx
-#' @return A data.frame with one row containing the osfi results.
+#' @return A data.frame with one row containing the aof results.
 #' @examples
 #' require("bcpa")
 #' # Exemple with simulated data:
@@ -41,14 +41,14 @@
 #'   Age = t.full[keep],
 #'   x = x.full[keep])
 #' # Running the algorithm
-#' AOF <- osfi(
+#' AOF <- aof(
 #'   bee = TimeBudget$bee,
 #'   Age = TimeBudget$Age,
 #'   x = TimeBudget$x)
 #' print(AOF)
 #' # see vignette for more examples
 #' @export
-osfi <- function(bee, Age, x){
+aof <- function(bee, Age, x){
   TimeBudget <- data.frame(
     bee = bee,
     Age = Age,
@@ -184,7 +184,7 @@ osfi <- function(bee, Age, x){
 
 
 
-# plot.osfi <- function(AOF)
+# plot.aof <- function(AOF)
 # graphics::plot(
 #   x = TimeBudget$Age,
 #   y = TimeBudget$x,

@@ -1,4 +1,4 @@
-Package: osfi
+Package: aof
 Type: Package
 Title: Ontogenetic Shifts in Central-Place Foraging Insects
 Version: 0.1.0
@@ -12,8 +12,8 @@ Encoding: UTF-8
 LazyData: true
 Imports:
   bcpa (>= 1.1)
-URL: https://github.com/frareb/osfi/
-BugReports: https://github.com/frareb/osfi/issues
+URL: https://github.com/frareb/aof/
+BugReports: https://github.com/frareb/aof/issues
 RoxygenNote: 7.0.2
 Suggests: 
     testthat,
