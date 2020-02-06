@@ -17,11 +17,11 @@ test_that("aof return data.frame",{
     SimTS(max(t.full)-t.break+1, mu2, rho2, sigma2))
   keep <- sort(sample(1:length(x.full), n.obs))
   TimeBudget <- data.frame(
-    bee = "A",
+    name = "A",
     Age = t.full[keep],
     x = x.full[keep])
   AOF <- aof(
-    bee = TimeBudget$bee,
+    name = TimeBudget$name,
     Age = TimeBudget$Age,
     x = TimeBudget$x)
   expect_equal(
@@ -48,11 +48,11 @@ test_that("aof return data.frame with 1 obs",{
               SimTS(max(t.full)-t.break+1, mu2, rho2, sigma2))
   keep <- sort(sample(1:length(x.full), n.obs))
   TimeBudget <- data.frame(
-    bee = "A",
+    name = "A",
     Age = t.full[keep],
     x = x.full[keep])
   AOF <- aof(
-    bee = TimeBudget$bee,
+    name = TimeBudget$name,
     Age = TimeBudget$Age,
     x = TimeBudget$x)
   expect_equal(
@@ -79,11 +79,11 @@ test_that("aof return data.frame with n.obs < 5 and > 1",{
               SimTS(max(t.full)-t.break+1, mu2, rho2, sigma2))
   keep <- sort(sample(1:length(x.full), n.obs))
   TimeBudget <- data.frame(
-    bee = "A",
+    name = "A",
     Age = t.full[keep],
     x = x.full[keep])
   AOF <- aof(
-    bee = TimeBudget$bee,
+    name = TimeBudget$name,
     Age = TimeBudget$Age,
     x = TimeBudget$x)
   expect_equal(
