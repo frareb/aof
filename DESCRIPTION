@@ -10,6 +10,8 @@ Description: A breakpoint-based method to detect ontogenetic shifts in
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
+Depends:
+  R (>= 3.5.0)
 Imports:
   bcpa (>= 1.1)
 URL: https://github.com/frareb/aof/
