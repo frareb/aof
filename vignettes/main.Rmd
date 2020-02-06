@@ -15,7 +15,7 @@ knitr::opts_chunk$set(
 ```
 
 ```{r setup}
-library("osfi")
+library("aof")
 library("bcpa")
 ```
 
@@ -50,7 +50,12 @@ getTimeBudget <- function(
     x = x.full[keep])
   return(TimeBudget)
 }
-getOsfiPlot <- function(t.break = 25, poly = FALSE){
+getAofPlot <- function(
+  TimeBudget = TimeBudget, 
+  AOF = AOF, 
+  t.break = 25, 
+  poly = FALSE
+){
   par(mar = c(4, 4, 1, 1), mfrow = c(1, 1))
   plot(
     x = TimeBudget$Age,
@@ -94,7 +99,7 @@ TimeBudget <- getTimeBudget(
   sigma1 = 0.1,
   sigma2 = 0.1)
 print(TimeBudget)
-AOF <- osfi(
+AOF <- aof(
   bee = TimeBudget[,1], 
   Age = TimeBudget[,2], 
   x = TimeBudget[,3])
@@ -102,7 +107,7 @@ print(AOF)
 ```
 
 ```{r cc011b, fig.width=7, fig.height=5, warning=FALSE}
-getOsfiPlot()
+getAofPlot(TimeBudget, AOF)
 ```
 
 ## 1.2. Low number of individuals and high variance
@@ -113,7 +118,7 @@ TimeBudget <- getTimeBudget(
   sigma1 = 3,
   sigma2 = 3)
 print(TimeBudget)
-AOF <- osfi(
+AOF <- aof(
   bee = TimeBudget[,1], 
   Age = TimeBudget[,2], 
   x = TimeBudget[,3])
@@ -121,7 +126,7 @@ print(AOF)
 ```
 
 ```{r cc012b, fig.width=7, fig.height=5, warning=FALSE}
-getOsfiPlot()
+getAofPlot(TimeBudget, AOF)
 ```
 
 ## 1.3. High number of individuals and low variance
@@ -132,7 +137,7 @@ TimeBudget <- getTimeBudget(
   sigma1 = 0.1,
   sigma2 = 0.1)
 print(TimeBudget)
-AOF <- osfi(
+AOF <- aof(
   bee = TimeBudget[,1], 
   Age = TimeBudget[,2], 
   x = TimeBudget[,3])
@@ -140,7 +145,7 @@ print(AOF)
 ```
 
 ```{r cc013b, fig.width=7, fig.height=5, warning=FALSE}
-getOsfiPlot()
+getAofPlot(TimeBudget, AOF)
 ```
 
 ## 1.4. High number of individuals and high variance
@@ -151,7 +156,7 @@ TimeBudget <- getTimeBudget(
   sigma1 = 3,
   sigma2 = 3)
 print(TimeBudget)
-AOF <- osfi(
+AOF <- aof(
   bee = TimeBudget[,1], 
   Age = TimeBudget[,2], 
   x = TimeBudget[,3])
@@ -159,7 +164,7 @@ print(AOF)
 ```
 
 ```{r cc014b, fig.width=7, fig.height=5, warning=FALSE}
-getOsfiPlot()
+getAofPlot(TimeBudget, AOF)
 ```
 
 # 2. Examples with change simulated in the time series
@@ -173,7 +178,7 @@ TimeBudget <- getTimeBudget(
   sigma1 = 0.1,
   sigma2 = 0.1)
 print(TimeBudget)
-AOF <- osfi(
+AOF <- aof(
   bee = TimeBudget[,1], 
   Age = TimeBudget[,2], 
   x = TimeBudget[,3])
@@ -181,7 +186,7 @@ print(AOF)
 ```
 
 ```{r cc021b, fig.width=7, fig.height=5, warning=FALSE}
-getOsfiPlot(poly = TRUE)
+getAofPlot(TimeBudget, AOF, poly = TRUE)
 ```
 
 ## 2.2. Low number of individuals and high variance
@@ -193,7 +198,7 @@ TimeBudget <- getTimeBudget(
   sigma1 = 3,
   sigma2 = 3)
 print(TimeBudget)
-AOF <- osfi(
+AOF <- aof(
   bee = TimeBudget[,1], 
   Age = TimeBudget[,2], 
   x = TimeBudget[,3])
@@ -201,7 +206,7 @@ print(AOF)
 ```
 
 ```{r cc022b, fig.width=7, fig.height=5, warning=FALSE}
-getOsfiPlot(poly = TRUE)
+getAofPlot(TimeBudget, AOF, poly = TRUE)
 ```
 
 ## 2.3. High number of individuals and low variance
@@ -213,7 +218,7 @@ TimeBudget <- getTimeBudget(
   sigma1 = 0.1,
   sigma2 = 0.1)
 print(TimeBudget)
-AOF <- osfi(
+AOF <- aof(
   bee = TimeBudget[,1], 
   Age = TimeBudget[,2], 
   x = TimeBudget[,3])
@@ -221,7 +226,7 @@ print(AOF)
 ```
 
 ```{r cc023b, fig.width=7, fig.height=5, warning=FALSE}
-getOsfiPlot(poly = TRUE)
+getAofPlot(TimeBudget, AOF, poly = TRUE)
 ```
 
 ## 2.3. High number of individuals and high variance
@@ -233,7 +238,7 @@ TimeBudget <- getTimeBudget(
   sigma1 = 3,
   sigma2 = 3)
 print(TimeBudget)
-AOF <- osfi(
+AOF <- aof(
   bee = TimeBudget[,1], 
   Age = TimeBudget[,2], 
   x = TimeBudget[,3])
@@ -241,12 +246,44 @@ print(AOF)
 ```
 
 ```{r cc024b, fig.width=7, fig.height=5, warning=FALSE}
-getOsfiPlot(poly = TRUE)
+getAofPlot(TimeBudget, AOF, poly = TRUE)
 ```
 
 # 3. Real dataset
 
 This is a subset of 16 bees randomly selected in the exeprimental design of Requier et al. (J. Animal Ecology). 
+
+```{r cc030, warning=FALSE}
+TimeBudget <- dataExample
+head(TimeBudget, n = 25)
+# working on Number of trips
+varX <- "Number"
+```
+
+```{r cc031, warning=FALSE}
+AOF <- aof(
+  bee = TimeBudget[,1], 
+  Age = TimeBudget[,2], 
+  x = TimeBudget[varX])
+print(AOF)
+```
+
+```{r cc032, fig.width=7, fig.height=5, warning=FALSE}
+goodbreak <- lapply(seq_along(unique(TimeBudget[,1])), function(i){
+  print(as.character(unique(TimeBudget[,1])[i]))
+  TimeBx <- TimeBudget[TimeBudget[,1] == unique(TimeBudget[,1])[i], c("bee", "Age", varX)]
+  names(TimeBx)[3] <- "x"
+  getAofPlot(
+    TimeBudget = TimeBx, 
+    AOF = AOF[i, ],
+    poly = TRUE)
+})
+```
+
+
+
+
+
 
 
 
