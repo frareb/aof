@@ -4,42 +4,40 @@
 #'
 #' @details A breakpoint-based method to detect ontogenetic shifts in
 #' univariate time-activity budget series of central-place foraging insects.
-#' The method finds a single breakpoint according to the likelihood function.
-#' The method was developped with honey bees in order to detect the
+#' The method finds a single change point according to the likelihood function.
+#' The method was developed with honey bees in order to detect the
 #' Age at Onset of Foraging (AOF), but can be used for the detection of other
-#' ontongenetic shifts in other central-place foraging insects. For more
+#' ontogenetic shifts in other central-place foraging insects. For more
 #' details, see Requier et al. (2020) Measuring ontogenetic shifts in
-#' central-place foraging insects. Journal of Animal Ecology.
+#' central-place foraging insects: a case study with honey bees. Journal of
+#' Animal Ecology.
 #'
-#' @param bee The identity of the bee as factor (e.g. "A00103C00020C301", "bee1").
-#' @param Age The age of the bee in day as numeric (e.g. 1, 4, 32).
-#' @param x The daily activity of the bee at a given age as a numeric value,
+#' @param bee The identity of the insect (e.g. a bee) as factor
+#'   (e.g. "A00103C00020C301", "bee1").
+#' @param Age The age of the insect in day as numeric (e.g. 1, 4, 32).
+#' @param x The daily activity of the insect at a given age as a numeric value,
 #'   for instance (i) the number of the trips per day, (ii) the duration of
 #'   the trips per day, or (iii) the time of the trips per day.
-#' @return A data.frame containing the aof results (one row per bee).
+#' @return A data.frame containing the aof results (one row per insect).
 #' @examples
 #' require("bcpa")
 #' # Exemple with simulated data:
-#' # No change simulated
-#' mu1 <- 50  # behavioral change: 25 or 50
+#' # A study case with no change simulated (mu1=mu2)
+#' mu1 <- 50  # behavioural value at stage 1
 #' mu2 <- 50
-#' rho1 = 0.5 # intrerval frequency
-#' rho2 = 0.5
-#' # N low and V low
-#' # A single changepoint in a time-series where the parameters change at
-#' # some unknown timepoints t* is done by simply sweeping all possible
-#' # breaks, and finding the most-likely changepoint according to the
-#' # likelihood. This is illustrated below:
-#' n.obs <- 5 # no. observations: 5 to 45
+#' rho1 <- 0.5 # interval frequency at stage 1
+#' rho2 <- rho1
+#' # Low number of individuals (N, n.obs) and low variance (V, sigma)
+#' # create time series from 0 to 50 with a behavioural change at 25
+#' t.full <- 0:50
+#' t.break <- 25
+#' n.obs <- 5 # no. observations randomly selected in the time series: 5 to 45
 #' sigma1 <- 0.1 # variance: 0.1 to 3
 #' sigma2 <- sigma1
 #' SimTS <- function(n, mu, rho, sigma){
 #'   X.standard <- arima.sim(n, model = list(ar = rho))
 #'   X.standard/sd(X.standard)*sigma + mu
 #' }
-#' # create time series with break at 25
-#' t.full <- 0:50
-#' t.break <- 25
 #' x.full <- c(SimTS(t.break, mu1, rho1, sigma1),
 #'   SimTS(max(t.full)-t.break+1, mu2, rho2, sigma2))
 #' # subsample of observations (n defined above) and estimate
@@ -87,7 +85,7 @@ aof <- function(bee, Age, x){
   prog.i <- 1
   # --------------------------------------------
 
-  # For each bee
+  # For each insect
   for(bee in unique(TimeBudget$bee)){
     select <- (TimeBudget$bee == bee)
     dataselect <- TimeBudget[select, ]
@@ -105,16 +103,16 @@ aof <- function(bee, Age, x){
       y <- dataselect[, parameter]
       data.source <- data.frame(x, y)
 
-      # If the number of trip day is egal to one,
-      # informing that "no data" is available for computing the funciton of
-      # behavioral change
+      # If the number of trip day is equal to one,
+      # informing that "no data" is available for computing the function of
+      # behavioural change
       if (length(x) <= 1){
         AOF$AOF[AOF$bee == bee & AOF$parameter == parameter] <- "no.data"
       }else{
 
         # If not (>1), and if the number of trip day is less than five,
         # informing that "not enough data" are available for computing the
-        # funciton of behavioral change
+        # function of behavioural change
         if (length(x) < 5){
           AOF$AOF[AOF$bee == bee &
             AOF$parameter == parameter] <- "not.enough.data"
@@ -123,14 +121,13 @@ aof <- function(bee, Age, x){
           # Here is informed the average value of the flight activity
         }else{
 
-          # for all the cases with more than five days of trips, we can
-          # computed the BCPA function (Gurarie, E. (2013) bcpa: Behavioral
-          # Change Point Analysis of Animal Movement; see also Gurarie et al.
-          # 2009, Ecology Letters)
-          # We use the GetBestBreak function of the bcpa R-package to detect
-          # the change point in the time series of (i) number, (ii) duration
-          # and (iii) time of daily trips
-
+          # for all cases with more than five days of trips, we can
+          # computed the GetBestBreak function of the bcpa R-package
+          # (Gurarie, E. (2013) bcpa: Behavioral Change Point Analysis of
+          # Animal Movement; see also Gurarie et al. 2009, Ecology Letters)
+          # We use GetBestBreak to detect a single behavioural change in time
+          # series of  of (i) number, (ii) duration, and (iii) time of daily
+          # trips.
           # If error in the model, we doesn't save the change point and inform
           # it as "undetected"
           if(class(tryCatch(
@@ -146,7 +143,7 @@ aof <- function(bee, Age, x){
             # using model selection with delta BIC > 2 between the simple
             # model (without change point) and all the six other models
             # predicting scenarii changes in the 3 differents parameters of
-            # the time serie. See the GetModels function for methematical
+            # the time series. See the GetModels function for methematical
             # details of each model this can be easily obtained using the
             # code '?GetModels'
             BB <- bcpa::GetBestBreak(y, x, tau = FALSE)
