@@ -1,13 +1,21 @@
 #' aof
 #'
-#' Ontogenetic Shifts in central-place Foraging Insects
+#' Ontogenetic shifts in central-place foraging insects
 #'
 #' @details A breakpoint-based method to detect ontogenetic shifts in
 #' univariate time-activity budget series of central-place foraging insects.
 #' The method finds a single breakpoint according to the likelihood function.
-#' @param bee xxxx
-#' @param Age xxx
-#' @param x xxxx
+#' The method was developped with honey bees in order to detect the
+#' Age at Onset of Foraging (AOF), but can be used for the detection of other
+#' ontongenetic shifts in other central-place foraging insects. For more
+#' details, see Requier et al. (2020) Measuring ontogenetic shifts in
+#' central-place foraging insects. Journal of Animal Ecology.
+#'
+#' @param bee The identity of the bee as factor (e.g. "A00103C00020C301", "bee1").
+#' @param Age The age of the bee in day as numeric (e.g. 1, 4, 32).
+#' @param x The daily activity of the bee at a given age as a numeric value,
+#'   for instance (i) the number of the trips per day, (ii) the duration of
+#'   the trips per day, or (iii) the time of the trips per day.
 #' @return A data.frame with one row containing the aof results.
 #' @examples
 #' require("bcpa")
@@ -29,12 +37,12 @@
 #'   X.standard <- arima.sim(n, model = list(ar = rho))
 #'   X.standard/sd(X.standard)*sigma + mu
 #' }
-#' # create time series with break at 500
+#' # create time series with break at 25
 #' t.full <- 0:50
 #' t.break <- 25
 #' x.full <- c(SimTS(t.break, mu1, rho1, sigma1),
 #'   SimTS(max(t.full)-t.break+1, mu2, rho2, sigma2))
-#' # subsample 100 observations and estimate
+#' # subsample of observations (n defined above) and estimate
 #' keep <- sort(sample(1:length(x.full), n.obs))
 #' TimeBudget <- data.frame(
 #'   bee = "A",
