@@ -4,13 +4,13 @@
 # aof package
 
 [![Build
-Status](https://travis-ci.org/frareb/aof.svg?branch=master)](https://travis-ci.org/frareb/aof)
+Status](https://travis-ci.org/frareb/osfi.svg?branch=master)](https://travis-ci.org/frareb/osfi)
 [![CRAN
 version](https://www.r-pkg.org/badges/version/aof)](https://CRAN.R-project.org/package=aof)
 [![CRAN
 downloads](https://cranlogs.r-pkg.org/badges/grand-total/aof)](https://CRAN.R-project.org/package=aof)
 [![Coverage
-Status](https://img.shields.io/codecov/c/gh/frareb/aof/master.svg)](https://codecov.io/gh/frareb/aof?branch=master)
+Status](https://img.shields.io/codecov/c/gh/frareb/osfi/master.svg)](https://codecov.io/gh/frareb/osfi?branch=master)
 
 ## Purpose of the package
 
