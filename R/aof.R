@@ -16,7 +16,7 @@
 #' @param x The daily activity of the bee at a given age as a numeric value,
 #'   for instance (i) the number of the trips per day, (ii) the duration of
 #'   the trips per day, or (iii) the time of the trips per day.
-#' @return A data.frame with one row containing the aof results.
+#' @return A data.frame containing the aof results (one row per bee).
 #' @examples
 #' require("bcpa")
 #' # Exemple with simulated data:

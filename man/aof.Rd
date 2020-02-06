@@ -16,7 +16,7 @@ for instance (i) the number of the trips per day, (ii) the duration of
 the trips per day, or (iii) the time of the trips per day.}
 }
 \value{
-A data.frame with one row containing the aof results.
+A data.frame containing the aof results (one row per bee).
 }
 \description{
 Ontogenetic shifts in central-place foraging insects
