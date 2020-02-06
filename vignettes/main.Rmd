@@ -19,13 +19,17 @@ library("aof")
 library("bcpa")
 ```
 
-A single changepoint in a time-series where the parameters change at some unknown timepoints t* is done by simply sweeping all possible breaks, and finding the most-likely changepoint according to the likelihood.
+A breakpoint-based method to detect ontogenetic shifts in univariate time-activity budget series of central-place foraging insects. The method finds a single changepoint in a time-series where the parameters change at some unknown timepoints t* is done by simply sweeping all possible breaks, and finding the most-likely changepoint according to the likelihood. The method was developed with honey bees in order to detect the Age at Onset of Foraging (AOF), but can be used for the detection of other ontogenetic shifts in other central-place foraging insects. For more details, see Requier et al. (2020) Measuring ontogenetic shifts in central-place foraging insects: a case study with honey bees. Journal of Animal Ecology.
 
 ```{r cc010}
-# mu1 and mu2: behavioral change: 25 or 50 (change on mu1)
-# rho1 and rho2 : intrerval frequency
-# n.obs: number of observations from 5 to 45
-# sigma1 and sigma2: variance from 0.1 to 3
+# mu1 and mu2: behavioural value at stage 1 and stage 2. Both values mu1 and mu2 are equal (e.g. 50) if no behavioural change is simulated, or differ (e.g. mu1=25 and mu2=50) if behavioural change is simulated.
+# rho1 and rho2 : interval frequency (default value 0.5 for both stages) 
+# n.obs: no. observations randomly selected in the time series, from 5 to 45
+# sigma1 and sigma2: variance around the behavioural value, from 0.1 to 3
+# t.full: time series from 0 to 50
+# n.obs: no. observations randomly selected in the time series, from 5 to 45
+# t.break: the time of the simulated behavioural change (default value of 25)
+
 getTimeBudget <- function(
   mu1 = 50,
   mu2 = 50,
@@ -91,7 +95,7 @@ getAofPlot <- function(
 
 # 1. Examples with no change simulated in the time series
 
-## 1.1. Low number of individuals and low variance
+## 1.1. Low number of individuals (N, n.obs) and low variance (V, sigma)
 
 ```{r cc011}
 TimeBudget <- getTimeBudget(
@@ -229,7 +233,7 @@ print(AOF)
 getAofPlot(TimeBudget, AOF, poly = TRUE)
 ```
 
-## 2.3. High number of individuals and high variance
+## 2.4. High number of individuals and high variance
 
 ```{r cc024}
 TimeBudget <- getTimeBudget(
@@ -251,32 +255,58 @@ getAofPlot(TimeBudget, AOF, poly = TRUE)
 
 # 3. Real dataset
 
-This is a subset of 16 bees randomly selected in the exeprimental design of Requier et al. (J. Animal Ecology). 
+This is a subset of 15 bees randomly selected in the exeprimental design of Requier et al. (J. Animal Ecology). 
 
 ```{r cc030, warning=FALSE}
 TimeBudget <- dataExample
 head(TimeBudget, n = 25)
-# working on Number of trips
-varX <- "Number"
 ```
 
 ```{r cc031, warning=FALSE}
-AOF <- aof(
+# working on Number of trips
+varX <- "Number"
+AOF_number <- aof(
   name = TimeBudget[,1], 
   Age = TimeBudget[,2], 
   x = TimeBudget[varX])
-print(AOF)
+print(AOF_number)
 ```
 
-```{r cc032, fig.width=7, fig.height=5, warning=FALSE}
+```{r cc031b, warning=FALSE}
+# working on Duration of trips
+varX <- "Duration"
+AOF_duration <- aof(
+  name = TimeBudget[,1], 
+  Age = TimeBudget[,2], 
+  x = TimeBudget[varX])
+print(AOF_duration)
+```
+
+```{r cc031c, warning=FALSE}
+# working on Time of trips
+varX <- "Time"
+AOF_time <- aof(
+  name = TimeBudget[,1], 
+  Age = TimeBudget[,2], 
+  x = TimeBudget[varX])
+print(AOF_time)
+```
+
+```{r cc032, warning=FALSE}
 goodbreak <- lapply(seq_along(unique(TimeBudget[,1])), function(i){
   print(as.character(unique(TimeBudget[,1])[i]))
-  TimeBx <- TimeBudget[TimeBudget[,1] == unique(TimeBudget[,1])[i], c("name", "Age", varX)]
-  names(TimeBx)[3] <- "x"
-  getAofPlot(
-    TimeBudget = TimeBx, 
-    AOF = AOF[i, ],
-    poly = TRUE)
+  par(mfrow = c(1, 3))
+  varXList <- list("Number", "Duration", "Time")
+  varAOFList <- list(AOF_number, AOF_duration, AOF_time)
+  sapply(1:3, function(j){
+    TimeBx <- TimeBudget[
+      TimeBudget[,1] == unique(TimeBudget[,1])[i], 
+      c("name", "Age", varXList[[j]])]
+    names(TimeBx)[3] <- "x"
+    getAofPlot(
+      TimeBudget = TimeBx, 
+      AOF = varAOFList[[j]][i, ])
+  })
 })
 ```
 
