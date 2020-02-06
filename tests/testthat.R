@@ -1,7 +1,7 @@
 library(testthat)
-library(osfi)
+library(aof)
 
-test_check("osfi")
+test_check("aof")
 
 # devtools::test()
 # covr::package_coverage()

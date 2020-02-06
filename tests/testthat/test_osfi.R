@@ -1,5 +1,5 @@
 
-test_that("osfi return data.frame",{
+test_that("aof return data.frame",{
   mu1 <- 50
   mu2 <- 50
   rho1 = 0.5
@@ -20,7 +20,7 @@ test_that("osfi return data.frame",{
     bee = "A",
     Age = t.full[keep],
     x = x.full[keep])
-  AOF <- osfi(
+  AOF <- aof(
     bee = TimeBudget$bee,
     Age = TimeBudget$Age,
     x = TimeBudget$x)
