@@ -4,10 +4,10 @@
 \alias{aof}
 \title{aof}
 \usage{
-aof(bee, Age, x)
+aof(name, Age, x)
 }
 \arguments{
-\item{bee}{The identity of the insect (e.g. a bee) as factor
+\item{name}{The identity of the insect (e.g. a bee) as factor
 (e.g. "A00103C00020C301", "bee1").}
 
 \item{Age}{The age of the insect in day as numeric (e.g. 1, 4, 32).}
@@ -57,12 +57,12 @@ x.full <- c(SimTS(t.break, mu1, rho1, sigma1),
 # subsample of observations (n defined above) and estimate
 keep <- sort(sample(1:length(x.full), n.obs))
 TimeBudget <- data.frame(
-  bee = "A",
+  name = "A",
   Age = t.full[keep],
   x = x.full[keep])
 # Running the algorithm
 AOF <- aof(
-  bee = TimeBudget$bee,
+  name = TimeBudget$name,
   Age = TimeBudget$Age,
   x = TimeBudget$x)
 print(AOF)

@@ -12,7 +12,7 @@
 #' central-place foraging insects: a case study with honey bees. Journal of
 #' Animal Ecology.
 #'
-#' @param bee The identity of the insect (e.g. a bee) as factor
+#' @param name The identity of the insect (e.g. a bee) as factor
 #'   (e.g. "A00103C00020C301", "bee1").
 #' @param Age The age of the insect in day as numeric (e.g. 1, 4, 32).
 #' @param x The daily activity of the insect at a given age as a numeric value,
@@ -43,33 +43,33 @@
 #' # subsample of observations (n defined above) and estimate
 #' keep <- sort(sample(1:length(x.full), n.obs))
 #' TimeBudget <- data.frame(
-#'   bee = "A",
+#'   name = "A",
 #'   Age = t.full[keep],
 #'   x = x.full[keep])
 #' # Running the algorithm
 #' AOF <- aof(
-#'   bee = TimeBudget$bee,
+#'   name = TimeBudget$name,
 #'   Age = TimeBudget$Age,
 #'   x = TimeBudget$x)
 #' print(AOF)
 #' # see vignette for more examples
 #' @export
-aof <- function(bee, Age, x){
+aof <- function(name, Age, x){
   TimeBudget <- data.frame(
-    bee = bee,
+    name = name,
     Age = Age,
     x = x)
 
   # Preparation of the output table
   # --------------------------------------------
   AOF <- data.frame(
-    bee = rep(
-      x = unique(TimeBudget$bee),
+    name = rep(
+      x = unique(TimeBudget$name),
       times = length(colnames(TimeBudget)[3:ncol(TimeBudget)])),
     parameter = sort(
       rep(
         x = colnames(TimeBudget)[3:ncol(TimeBudget)],
-        times = length(unique(TimeBudget$bee)))),
+        times = length(unique(TimeBudget$name)))),
     AOF = NA, # will be computed later
     behav.flightspan = NA, # will be computed later
     behav.learning = NA, # will be computed later
@@ -80,18 +80,18 @@ aof <- function(bee, Age, x){
 
   # Initial work time of the function
   # --------------------------------------------
-  iter <- length(unique(TimeBudget$bee))
+  iter <- length(unique(TimeBudget$name))
   progress.time <- utils::txtProgressBar(min = 0, max = iter, style = 3)
   prog.i <- 1
   # --------------------------------------------
 
   # For each insect
-  for(bee in unique(TimeBudget$bee)){
-    select <- (TimeBudget$bee == bee)
+  for(name in unique(TimeBudget$name)){
+    select <- (TimeBudget$name == name)
     dataselect <- TimeBudget[select, ]
     dataselect <- dataselect[order(dataselect$Age), ]
 
-    # Work time progress of the function, updated after each bee proceed
+    # Work time progress of the function, updated after each insect proceed
     # --------------------------------------------
     utils::setTxtProgressBar(progress.time, prog.i)
     prog.i <- prog.i + 1
@@ -107,16 +107,16 @@ aof <- function(bee, Age, x){
       # informing that "no data" is available for computing the function of
       # behavioural change
       if (length(x) <= 1){
-        AOF$AOF[AOF$bee == bee & AOF$parameter == parameter] <- "no.data"
+        AOF$AOF[AOF$name == name & AOF$parameter == parameter] <- "no.data"
       }else{
 
         # If not (>1), and if the number of trip day is less than five,
         # informing that "not enough data" are available for computing the
         # function of behavioural change
         if (length(x) < 5){
-          AOF$AOF[AOF$bee == bee &
+          AOF$AOF[AOF$name == name &
             AOF$parameter == parameter] <- "not.enough.data"
-          AOF$behav.flightspan[AOF$bee == bee &
+          AOF$behav.flightspan[AOF$name == name &
             AOF$parameter==parameter] <- mean(data.source$y)
           # Here is informed the average value of the flight activity
         }else{
@@ -133,9 +133,9 @@ aof <- function(bee, Age, x){
           if(class(tryCatch(
             bcpa::GetBestBreak(y, x,tau=FALSE),
             error = function(e) e))[1] == "simpleError"){
-            AOF$AOF[AOF$bee == bee &
+            AOF$AOF[AOF$name == name &
               AOF$parameter == parameter] <- "undetected"
-            AOF$behav.flightspan[AOF$bee == bee &
+            AOF$behav.flightspan[AOF$name == name &
               AOF$parameter == parameter] <- mean(data.source$y)
           }else{
 
@@ -156,22 +156,22 @@ aof <- function(bee, Age, x){
             mod <- bcpa::GetModels(y, x, BB[1], tau = FALSE)
             mod[, 3] <- ifelse(mod[,3] %in% c("Inf", "-Inf"), NA, mod[, 3])
             if(diff(c(min(mod[2:8, 3], na.rm = T),mod[1,3])) >= 2){
-              AOF$AOF[AOF$bee == bee &
+              AOF$AOF[AOF$name == name &
                 AOF$parameter == parameter] <- BB[2]
-              AOF$behav.flightspan[AOF$bee == bee &
+              AOF$behav.flightspan[AOF$name == name &
                 AOF$parameter == parameter] <- mean(data.source$y)
-              AOF$behav.learning[AOF$bee == bee &
+              AOF$behav.learning[AOF$name == name &
                 AOF$parameter == parameter] <- mean(
                   subset(data.source, data.source$x <= BB[2])$y)
-              AOF$behav.foraging[AOF$bee == bee &
+              AOF$behav.foraging[AOF$name == name &
                 AOF$parameter == parameter] <- mean(
                   subset(data.source, data.source$x > BB[2])$y)
             }else{
               # If the delta BIC < 2, we doesn't save the change point and
               # inform it as "undetected"
-              AOF$AOF[AOF$bee == bee &
+              AOF$AOF[AOF$name == name &
                 AOF$parameter == parameter] <- "undetected"
-              AOF$behav.flightspan[AOF$bee == bee &
+              AOF$behav.flightspan[AOF$name == name &
                 AOF$parameter == parameter] <- mean(data.source$y)
             }
           }

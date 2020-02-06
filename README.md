@@ -17,6 +17,12 @@ Status](https://img.shields.io/codecov/c/gh/frareb/osfi/master.svg)](https://cod
 A breakpoint-based method to detect ontogenetic shifts in univariate
 time-activity budget series of central-place foraging insects. The
 method finds a single breakpoint according to the likelihood function.
+The method was developed with honey bees in order to detect the Age at
+Onset of Foraging (AOF), but can be used for the detection of other
+ontogenetic shifts in other central-place foraging insects. For more
+details, see Requier et al. (2020) Measuring ontogenetic shifts in
+central-place foraging insects: a case study with honey bees. Journal of
+Animal Ecology.
 
 ## Installation instructions
 
@@ -38,14 +44,14 @@ To cite this package please use:
 ``` r
 citation("aof") 
 #> 
-#> Requier F, Rebaudo F (2020). _osfi: Ontogenetic Shifts in Central-Place
+#> Requier F, Rebaudo F (2020). _aof: Ontogenetic Shifts in Central-Place
 #> Foraging Insects_. R package version 0.1.0, <URL:
 #> https://github.com/frareb/aof/>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
 #>   @Manual{,
-#>     title = {osfi: Ontogenetic Shifts in Central-Place Foraging Insects},
+#>     title = {aof: Ontogenetic Shifts in Central-Place Foraging Insects},
 #>     author = {Fabrice Requier and François Rebaudo},
 #>     year = {2020},
 #>     note = {R package version 0.1.0},

@@ -45,7 +45,7 @@ getTimeBudget <- function(
     SimTS(max(t.full) - t.break + 1, mu2, rho2, sigma2))
   keep <- sort(sample(1:length(x.full), n.obs))
   TimeBudget <- data.frame(
-    bee = "A",
+    name = "A",
     Age = t.full[keep],
     x = x.full[keep])
   return(TimeBudget)
@@ -100,7 +100,7 @@ TimeBudget <- getTimeBudget(
   sigma2 = 0.1)
 print(TimeBudget)
 AOF <- aof(
-  bee = TimeBudget[,1], 
+  name = TimeBudget[,1], 
   Age = TimeBudget[,2], 
   x = TimeBudget[,3])
 print(AOF)
@@ -119,7 +119,7 @@ TimeBudget <- getTimeBudget(
   sigma2 = 3)
 print(TimeBudget)
 AOF <- aof(
-  bee = TimeBudget[,1], 
+  name = TimeBudget[,1], 
   Age = TimeBudget[,2], 
   x = TimeBudget[,3])
 print(AOF)
@@ -138,7 +138,7 @@ TimeBudget <- getTimeBudget(
   sigma2 = 0.1)
 print(TimeBudget)
 AOF <- aof(
-  bee = TimeBudget[,1], 
+  name = TimeBudget[,1], 
   Age = TimeBudget[,2], 
   x = TimeBudget[,3])
 print(AOF)
@@ -157,7 +157,7 @@ TimeBudget <- getTimeBudget(
   sigma2 = 3)
 print(TimeBudget)
 AOF <- aof(
-  bee = TimeBudget[,1], 
+  name = TimeBudget[,1], 
   Age = TimeBudget[,2], 
   x = TimeBudget[,3])
 print(AOF)
@@ -179,7 +179,7 @@ TimeBudget <- getTimeBudget(
   sigma2 = 0.1)
 print(TimeBudget)
 AOF <- aof(
-  bee = TimeBudget[,1], 
+  name = TimeBudget[,1], 
   Age = TimeBudget[,2], 
   x = TimeBudget[,3])
 print(AOF)
@@ -199,7 +199,7 @@ TimeBudget <- getTimeBudget(
   sigma2 = 3)
 print(TimeBudget)
 AOF <- aof(
-  bee = TimeBudget[,1], 
+  name = TimeBudget[,1], 
   Age = TimeBudget[,2], 
   x = TimeBudget[,3])
 print(AOF)
@@ -219,7 +219,7 @@ TimeBudget <- getTimeBudget(
   sigma2 = 0.1)
 print(TimeBudget)
 AOF <- aof(
-  bee = TimeBudget[,1], 
+  name = TimeBudget[,1], 
   Age = TimeBudget[,2], 
   x = TimeBudget[,3])
 print(AOF)
@@ -239,7 +239,7 @@ TimeBudget <- getTimeBudget(
   sigma2 = 3)
 print(TimeBudget)
 AOF <- aof(
-  bee = TimeBudget[,1], 
+  name = TimeBudget[,1], 
   Age = TimeBudget[,2], 
   x = TimeBudget[,3])
 print(AOF)
@@ -262,7 +262,7 @@ varX <- "Number"
 
 ```{r cc031, warning=FALSE}
 AOF <- aof(
-  bee = TimeBudget[,1], 
+  name = TimeBudget[,1], 
   Age = TimeBudget[,2], 
   x = TimeBudget[varX])
 print(AOF)
@@ -271,7 +271,7 @@ print(AOF)
 ```{r cc032, fig.width=7, fig.height=5, warning=FALSE}
 goodbreak <- lapply(seq_along(unique(TimeBudget[,1])), function(i){
   print(as.character(unique(TimeBudget[,1])[i]))
-  TimeBx <- TimeBudget[TimeBudget[,1] == unique(TimeBudget[,1])[i], c("bee", "Age", varX)]
+  TimeBx <- TimeBudget[TimeBudget[,1] == unique(TimeBudget[,1])[i], c("name", "Age", varX)]
   names(TimeBx)[3] <- "x"
   getAofPlot(
     TimeBudget = TimeBx, 
