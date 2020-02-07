@@ -87,11 +87,11 @@ getAofPlot <- function(
   abline(v = AOF$AOF, col = "black", lwd = 2, lty = 3)
   lines(
     x = c(min(TimeBudget$Age), AOF$AOF), 
-    y = c(AOF$behav.learning, AOF$behav.learning), 
+    y = c(AOF$behav.stage1, AOF$behav.stage1), 
     col = "black", lwd = 2)
   lines(
     x = c(AOF$AOF, max(TimeBudget$Age)),
-    y = c(AOF$behav.foraging, AOF$behav.foraging),
+    y = c(AOF$behav.stage2, AOF$behav.stage2),
     col = "black", lwd = 2)
   return(c(goodbreak1, goodbreak2))
 }
@@ -259,7 +259,7 @@ getAofPlot(TimeBudget, AOF)
 
 # 3. Real dataset
 
-This is a subset of 5 bees randomly selected in the exeprimental design of Requier et al. (J. Animal Ecology). 
+This is a subset of 5 bees randomly selected in the experimental design of Requier et al. (J. Animal Ecology). 
 
 ```{r cc030, warning=FALSE}
 TimeBudget <- dataExample
