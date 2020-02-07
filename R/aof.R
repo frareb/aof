@@ -100,9 +100,9 @@ aof <- function(name, Age, x){
         x = colnames(TimeBudget)[3:ncol(TimeBudget)],
         times = length(unique(TimeBudget$name)))),
     AOF = NA, # will be computed later
-    behav.flightspan = NA, # will be computed later
-    behav.learning = NA, # will be computed later
-    behav.foraging = NA) # will be computed later
+    behav.total = NA, # will be computed later
+    behav.stage1 = NA, # will be computed later
+    behav.stage2 = NA) # will be computed later
   # --------------------------------------------
 
   # start of the algorithm
@@ -145,7 +145,7 @@ aof <- function(name, Age, x){
         if (length(x) < 5){
           AOF$AOF[AOF$name == name &
             AOF$parameter == parameter] <- "not.enough.data"
-          AOF$behav.flightspan[AOF$name == name &
+          AOF$behav.total[AOF$name == name &
             AOF$parameter==parameter] <- mean(data.source$y)
           # Here is informed the average value of the flight activity
         }else{
@@ -164,7 +164,7 @@ aof <- function(name, Age, x){
             error = function(e) e))[1] == "simpleError"){
             AOF$AOF[AOF$name == name &
               AOF$parameter == parameter] <- "undetected"
-            AOF$behav.flightspan[AOF$name == name &
+            AOF$behav.total[AOF$name == name &
               AOF$parameter == parameter] <- mean(data.source$y)
           }else{
 
@@ -187,12 +187,12 @@ aof <- function(name, Age, x){
             if(diff(c(min(mod[2:8, 3], na.rm = T),mod[1,3])) >= 2){
               AOF$AOF[AOF$name == name &
                 AOF$parameter == parameter] <- BB[2]
-              AOF$behav.flightspan[AOF$name == name &
+              AOF$behav.total[AOF$name == name &
                 AOF$parameter == parameter] <- mean(data.source$y)
-              AOF$behav.learning[AOF$name == name &
+              AOF$behav.stage1[AOF$name == name &
                 AOF$parameter == parameter] <- mean(
                   subset(data.source, data.source$x <= BB[2])$y)
-              AOF$behav.foraging[AOF$name == name &
+              AOF$behav.stage2[AOF$name == name &
                 AOF$parameter == parameter] <- mean(
                   subset(data.source, data.source$x > BB[2])$y)
             }else{
@@ -200,7 +200,7 @@ aof <- function(name, Age, x){
               # inform it as "undetected"
               AOF$AOF[AOF$name == name &
                 AOF$parameter == parameter] <- "undetected"
-              AOF$behav.flightspan[AOF$name == name &
+              AOF$behav.total[AOF$name == name &
                 AOF$parameter == parameter] <- mean(data.source$y)
             }
           }
