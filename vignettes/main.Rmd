@@ -194,7 +194,7 @@ print(AOF)
 ```
 
 ```{r cc021b, fig.width=7, fig.height=5, warning=FALSE}
-getAofPlot(TimeBudget, AOF, poly = TRUE)
+getAofPlot(TimeBudget, AOF)
 ```
 
 ## 2.2. Low number of individuals and high variance
@@ -214,7 +214,7 @@ print(AOF)
 ```
 
 ```{r cc022b, fig.width=7, fig.height=5, warning=FALSE}
-getAofPlot(TimeBudget, AOF, poly = TRUE)
+getAofPlot(TimeBudget, AOF)
 ```
 
 ## 2.3. High number of individuals and low variance
@@ -234,7 +234,7 @@ print(AOF)
 ```
 
 ```{r cc023b, fig.width=7, fig.height=5, warning=FALSE}
-getAofPlot(TimeBudget, AOF, poly = TRUE)
+getAofPlot(TimeBudget, AOF)
 ```
 
 ## 2.4. High number of individuals and high variance
@@ -254,7 +254,7 @@ print(AOF)
 ```
 
 ```{r cc024b, fig.width=7, fig.height=5, warning=FALSE}
-getAofPlot(TimeBudget, AOF, poly = TRUE)
+getAofPlot(TimeBudget, AOF)
 ```
 
 # 3. Real dataset
