@@ -1,6 +1,6 @@
-#' @title subset of 15 bees.
+#' @title subset of 5 bees.
 #'
-#' @description This is a subset of 15 bees randomly selected in the
+#' @description This is a subset of 5 bees randomly selected in the
 #'   exeprimental design of Requier et al. (J. Animal Ecology).
 #' @format A data.frame with three columns.
 #' \describe{

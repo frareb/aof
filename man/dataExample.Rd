@@ -3,7 +3,7 @@
 \docType{data}
 \name{dataExample}
 \alias{dataExample}
-\title{subset of 15 bees.}
+\title{subset of 5 bees.}
 \format{A data.frame with three columns.
 \describe{
   \item{name}{The identity of the bee}
@@ -16,7 +16,7 @@
 dataExample
 }
 \description{
-This is a subset of 15 bees randomly selected in the
+This is a subset of 5 bees randomly selected in the
   exeprimental design of Requier et al. (J. Animal Ecology).
 }
 \keyword{datasets}
