@@ -35,9 +35,11 @@ Animal Ecology.
 }
 \examples{
 require("bcpa")
+
 # Exemple with simulated data:
-# A study case with no change simulated (mu1=mu2)
-mu1 <- 50  # behavioural value at stage 1
+# A study case with with change simulated (i.e. mu1 and mu2 are different)
+# --------------------------------------------------
+mu1 <- 25  # behavioural value at stage 1
 mu2 <- 50
 rho1 <- 0.5 # interval frequency at stage 1
 rho2 <- rho1
@@ -45,7 +47,7 @@ rho2 <- rho1
 # create time series from 0 to 50 with a behavioural change at 25
 t.full <- 0:50
 t.break <- 25
-n.obs <- 5 # no. observations randomly selected in the time series: 5 to 45
+n.obs <- 35 # no. observations randomly selected in the time series: 5 to 45
 sigma1 <- 0.1 # variance: 0.1 to 3
 sigma2 <- sigma1
 SimTS <- function(n, mu, rho, sigma){
@@ -66,5 +68,32 @@ AOF <- aof(
   Age = TimeBudget$Age,
   x = TimeBudget$x)
 print(AOF)
+
+# Exemple with real data extracted from Requier et al.
+# (2020, J. Animal Ecology):
+# --------------------------------------------------
+TimeBudget <- dataExample
+# working on Number of trips
+varX <- "Number"
+AOF_number <- aof(
+  name = TimeBudget[,1],
+  Age = TimeBudget[,2],
+  x = TimeBudget[varX])
+print(AOF_number)
+# working on Duration of trips
+varX <- "Duration"
+AOF_duration <- aof(
+  name = TimeBudget[,1],
+  Age = TimeBudget[,2],
+  x = TimeBudget[varX])
+print(AOF_duration)
+# working on Time of trips
+varX <- "Time"
+AOF_time <- aof(
+  name = TimeBudget[,1],
+  Age = TimeBudget[,2],
+  x = TimeBudget[varX])
+print(AOF_time)
+
 # see vignette for more examples
 }
