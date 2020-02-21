@@ -64,7 +64,7 @@ getAofPlot <- function(
   poly = FALSE,
   ylabX = "x"
 ){
-  par(mar = c(4, 4, 1, 1), mfrow = c(1, 1))
+  oldpar <- par(mar = c(4, 4, 1, 1), mfrow = c(1, 1))
   plot(
     x = TimeBudget$Age,
     y = TimeBudget$x, 
@@ -93,6 +93,7 @@ getAofPlot <- function(
     x = c(AOF$AOF, max(TimeBudget$Age)),
     y = c(AOF$behav.stage2, AOF$behav.stage2),
     col = "black", lwd = 2)
+  par(oldpar)
   return(c(goodbreak1, goodbreak2))
 }
 ```
@@ -315,8 +316,6 @@ goodbreak <- lapply(seq_along(unique(TimeBudget[,1])), function(i){
   })
 })
 ```
-
-
 
 
 
