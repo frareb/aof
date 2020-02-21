@@ -1,7 +1,7 @@
 Package: aof
 Type: Package
 Title: Ontogenetic Shifts in Central-Place Foraging Insects
-Version: 0.1.0
+Version: 0.1.1
 Author: Fabrice Requier [aut, cre], François Rebaudo [aut]
 Maintainer: Fabrice Requier <fabrice.requier@egce.cnrs-gif.fr>
 Description: A breakpoint-based method to detect ontogenetic shifts in 
