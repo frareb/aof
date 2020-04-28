@@ -4,14 +4,16 @@
 \name{dataExample}
 \alias{dataExample}
 \title{subset of 5 bees.}
-\format{A data.frame with three columns.
+\format{
+A data.frame with three columns.
 \describe{
   \item{name}{The identity of the bee}
   \item{Age}{The age of the bee in day.}
   \item{Number}{Number of trips per day.}
   \item{Duration}{duration of trips per day.}
   \item{Time}{Time of trips per day.}
-}}
+}
+}
 \usage{
 dataExample
 }

@@ -42,8 +42,8 @@ To cite this package please use:
 citation("aof") 
 #> 
 #> Requier F, Rebaudo F (2020). _aof: Ontogenetic Shifts in Central-Place
-#> Foraging Insects_. R package version 0.1.0, <URL:
-#> https://github.com/frareb/aof/>.
+#> Foraging Insects_. R package version 0.1.3, <URL:
+#> https://cran.r-project.org/package=aof>.
 #> 
 #> A BibTeX entry for LaTeX users is
 #> 
@@ -51,7 +51,7 @@ citation("aof")
 #>     title = {aof: Ontogenetic Shifts in Central-Place Foraging Insects},
 #>     author = {Fabrice Requier and François Rebaudo},
 #>     year = {2020},
-#>     note = {R package version 0.1.0},
-#>     url = {https://github.com/frareb/aof/},
+#>     note = {R package version 0.1.3},
+#>     url = {https://cran.r-project.org/package=aof},
 #>   }
 ```

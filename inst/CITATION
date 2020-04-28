@@ -6,5 +6,5 @@ bibentry(bibtype = 'Manual',
   author = "Fabrice Requier and François Rebaudo",
   year = year,
   note = note,
-  url = "https://github.com/frareb/aof/"
+  url = "https://cran.r-project.org/package=aof"
 )
