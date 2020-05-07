@@ -10,7 +10,7 @@ Description: A breakpoint-based method to detect ontogenetic shifts in
   The method was developed with honey bees in order to detect the Age at 
   Onset of Foraging (AOF), but can be used for the detection of other 
   ontogenetic shifts in other central-place foraging insects. The methods 
-  are described in Requier et al. (2018) <doi:10.1111/1365-2656.13248>.
+  are described in Requier et al. (2020) <doi:10.1111/1365-2656.13248>.
 License: GPL-2
 Encoding: UTF-8
 LazyData: true
