@@ -36,7 +36,14 @@ devtools::install_github("frareb/aof")
 
 UMR EGCE (IRD, CNRS, Univ. Paris-Saclay), Gif-sur-Yvette, France
 
-To cite this package please use:
+To cite this package please use the article describing the methods:
+
+Requier, F., Henry, M., Decourtye, A., Brun, F., Aupinel, P., Rebaudo,
+F., Bretagnolle, V. (2020) Measuring ontogenetic shifts in central-place
+foragers: a case study with honey bees. Journal of Animal Ecology
+<https://doi.org/10.1111/1365-2656.13248>
+
+and/or the package itself:
 
 ``` r
 citation("aof") 
